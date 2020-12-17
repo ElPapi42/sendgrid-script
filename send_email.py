@@ -12,11 +12,16 @@ with open(sys.argv[1], newline='') as csvfile:
     for row in reader:
         emails.append(row['email'])
 
+template = '<h1>You dont supply an html template to the script</h1>'
+
+with open(sys.argv[2], 'r') as htmlfile:
+    template = htmlfile.read()
+
 sg = SendGridAPIClient(api_key=os.environ.get('SENDGRID_API_KEY'))
 
 from_email = Email('whitman-2@hotmail.com')
 subject = 'Sending with SendGrid is Fun'
-content = Content('text/plain', 'and easy to do anywhere, even with Python')
+content = Content('text/html', template)
 
 mail = Mail(from_email, emails, subject, content)
 
