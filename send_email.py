@@ -14,12 +14,11 @@ with open(sys.argv[1], newline='') as csvfile:
 
 sg = SendGridAPIClient(api_key=os.environ.get('SENDGRID_API_KEY'))
 
-from_email = Email("test@example.com")
-to_email = To("test@example.com")
-subject = "Sending with SendGrid is Fun"
-content = Content("text/plain", "and easy to do anywhere, even with Python")
+from_email = Email('whitman-2@hotmail.com')
+subject = 'Sending with SendGrid is Fun'
+content = Content('text/plain', 'and easy to do anywhere, even with Python')
 
-mail = Mail(from_email, to_email, subject, content)
+mail = Mail(from_email, emails, subject, content)
 
 response = sg.client.mail.send.post(request_body=mail.get())
 
